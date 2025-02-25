@@ -38,7 +38,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFormSubmit() {
+  onFormSubmit(): void {
     const updateCategotyRequest: UpdateCategoryRequest = {
       name: this.category?.name ?? '',
       urlHandle: this.category?.urlHandle ?? '',
@@ -53,6 +53,17 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
             this.router.navigateByUrl('/admin/categories');
           },
         });
+    }
+  }
+
+  onDelete(): void{
+    if(this.id){
+      this.categoryService.deleteCategory(this.id)
+        .subscribe({
+          next: (response) =>{
+            this.router.navigateByUrl('/admin/categories');
+          }
+        })
     }
   }
 
